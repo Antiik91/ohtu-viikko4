@@ -1,3 +1,13 @@
 pekka;akkep
 jukka;akkuj
 ukko;ukko
+ville;valle
+Pätkä;hyäsalsana
+Pätkä-2040428175;hyäsalsana
+Pätkä199718961;hyäsalsana
+Pätkä1620708666;hyäsalsana
+Pätkä-515702401;hyäsalasana
+Pätkä555457094;hyäsalasana
+Pätkä-2145391144;hyäsalasana
+Pätkä1018161952;hyäsalasana
+Pätkä135558499;hyäsalasana
