@@ -42,7 +42,14 @@ public class Stepdefs {
     }
 
     private void newUser(String username, String password) {
-        WebElement element = driver.findElement(By.name("username"));
+        if (driver == null) {
+            System.setProperty("webdriver.chrome.driver", "/home/janantik/git/ohtu-viikko4/chromedriver");
+            this.driver = new ChromeDriver();
+        }
+        driver.get(baseUrl);
+        WebElement element = driver.findElement(By.linkText(("register new user")));
+        element.click();
+        element = driver.findElement(By.name("username"));
         element.sendKeys(username);
         element = driver.findElement(By.name("password"));
         element.sendKeys(password);
@@ -84,7 +91,9 @@ public class Stepdefs {
 
     @After
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Given("^new user is selected$")
@@ -96,6 +105,32 @@ public class Stepdefs {
         driver.get(baseUrl);
         WebElement element = driver.findElement(By.linkText("register new user"));
         element.click();
+    }
+    @Given("^user with username \"([^\"]*)\" and password \"([^\"]*)\" is unsuccesfully created$")
+    public void user_with_username_and_password_is_unsuccesfully_created(String arg1, String arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        newUser(arg1, arg2);
+    }
+
+    @When("^incorrect username \"([^\"]*)\" and incorrect password \"([^\"]*)\" are given$")
+    public void incorrect_username_and_incorrect_password_are_given(String arg1, String arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        usernameAndPassword(arg1,arg2);
+    }
+
+    @Given("^user with username \"([^\"]*)\" with password \"([^\"]*)\" is succesfully created$")
+    public void user_with_username_with_password_is_succesfully_created(String arg1, String arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+       
+        if(this.driver == null) {
+            System.setProperty("webdriver.chrome.driver", "/home/janantik/git/ohtu-viikko4/chromedriver");
+            driver = new ChromeDriver();
+        }
+         this.driver.get(baseUrl);
+         WebElement e  = driver.findElement(By.linkText("register new user"));
+         e.click();
+         newUser(arg1, arg2);
+        driver.get(baseUrl);
     }
 
     @When("^new username \"([^\"]*)\" and password \"([^\"]*)\" are given$")
